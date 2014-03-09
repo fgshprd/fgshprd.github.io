@@ -1,0 +1,116 @@
+/* primary stylesheet */
+
+* { box-sizing: border-box; }
+body { 
+	line-height: 1.5em;
+	font-size: 1em;
+	font-family: Helvetica, sans-serif;
+	margin-left: 10em;
+	background-image: -webkit-linear-gradient(left, rgb(255, 255, 255), rgb(255, 255, 255) 46em, rgb(204, 204, 204) 47em);
+}
+h1, h2, h3 { text-transform: uppercase; font-weight: bold; }
+h2 { font-size: 1.5em; line-height: 2.25em; letter-spacing: .12em }
+h3 { font-size: 1.15em; line-height: 1.7025em; }
+h4 { font-size: 1.125em; line-height: 1.67625em; }
+
+#page {
+	margin: 0 0 0 1em;
+	max-width: 1000px;
+	width: 31em;
+}
+#page > div { max-width: 31em; }
+
+.header {
+	padding: 1em 0 0; 
+	position: relative;
+	top: 0;
+	background-color: white;
+	z-index: 2;
+	height: 13em;
+}
+.header > .title { 
+	font-size: 2em;
+	font-weight: bold;
+	line-height: 3em;
+	text-transform: uppercase;
+	background-color: rgb(255, 122, 0);
+	letter-spacing: .1em;
+	width: 16em;
+}
+.header > .title:before { content: '\27A1    '; margin-left: -.9em; }
+.header:after {
+	content: '';
+	width: 9em;
+	height: 13em;
+	border-bottom: 1em solid black;
+	border-left: 1em solid black;
+	position: absolute;
+	display: block;
+	left: -10em; 
+	top: -1em;
+	z-index: -1;	
+}
+.header > .navlist { font-size: .75em; margin: .5em 0 0 -8.75em; color: rgb(255, 122, 0); }
+.header > .navlist > li:first-child { width: 8em; margin-right: .5em; color: black; }
+.header > .navlist > li {
+	display: inline-block;
+	margin-right: 1em;
+}
+.header > .navlist > li > a,
+.header > .navlist > li > a.link,
+.header > .navlist > li > a.visited,
+.header > .navlist > li > a.active {
+	text-decoration: none;
+	color: rgb(255, 122, 0);
+}
+.header > .navlist > li:first-child > a,
+.header > .navlist > li:first-child > a:link,
+.header > .navlist > li:first-child > a:active,
+.header > .navlist > li:first-child > a:visited {
+	text-decoration: none;
+	color: black;
+}
+#page > .content { margin-top: 2.5em; }
+.resume h2, .projects h2, .contact h2 { position: relative; padding: 3.5em 0 1.5em; }
+.resume h2:after, .projects h2:after, .contact h2:after {
+	content: '';
+	width: 4.35em;
+	height: 1em;
+	border-top: .3em solid rgb(255, 122, 0);
+	border-left: .3em solid rgb(255, 122, 0);
+	display: block;
+	position: absolute;
+	top: 5.5em;
+}
+.projects h2:after { width: 5.7em; }
+.contact h2:after { width: 5.2em; }
+.job { margin: 0 0 1.5em 0; }
+.job > ul { margin: 1em 0 0; padding: 0; }
+.job > ul > li:before { content: '\25A0'; margin-right: .5em; color: rgb(255, 122, 0); }
+
+.project, .projects > .intro { margin-bottom: 1em; }
+
+.contact > ul > li { display: inline-block; margin-right: .5em; }
+
+#page > div.footer {
+	font-size: .75em;
+	line-height: 3em;
+	padding: 2em 0 1em;
+}
+
+#page > aside {
+	width: 44%;
+	position: absolute;
+	left: 47em;
+	top: 0;
+	height: 100%;
+	padding: 2em;
+	margin: 1.5em;
+}
+
+#page > aside > h2 {
+	font-size: 1em;
+	text-transform: none;
+	padding: 0;
+	margin: 0;
+}
