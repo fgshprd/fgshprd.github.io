@@ -13,12 +13,14 @@ h2 { font-size: 1.5em; line-height: 2.25em; letter-spacing: .12em }
 h3 { font-size: 1.15em; line-height: 1.7025em; }
 h4 { font-size: 1.125em; line-height: 1.67625em; }
 
+em { font-style: italic; }
+
 #page {
 	margin: 0 0 0 1em;
 	max-width: 1000px;
 	width: 31em;
 }
-#page > div { max-width: 31em; }
+/*#page > div { max-width: 31em; }*/
 
 .header {
 	padding: 1em 0 0; 
@@ -71,26 +73,7 @@ h4 { font-size: 1.125em; line-height: 1.67625em; }
 	color: black;
 }
 #page > .content { margin-top: 2.5em; }
-.resume h2, .projects h2, .contact h2 { position: relative; padding: 3.5em 0 1.5em; }
-.resume h2:after, .projects h2:after, .contact h2:after {
-	content: '';
-	width: 4.35em;
-	height: 1em;
-	border-top: .3em solid rgb(255, 122, 0);
-	border-left: .3em solid rgb(255, 122, 0);
-	display: block;
-	position: absolute;
-	top: 5.5em;
-}
-.projects h2:after { width: 5.7em; }
-.contact h2:after { width: 5.2em; }
-.job { margin: 0 0 1.5em 0; }
-.job > ul { margin: 1em 0 0; padding: 0; }
-.job > ul > li:before { content: '\25A0'; margin-right: .5em; color: rgb(255, 122, 0); }
-
-.project, .projects > .intro { margin-bottom: 1em; }
-
-.contact > ul > li { display: inline-block; margin-right: .5em; }
+#page > .content > p { text-align: justify; text-indent: 2em; }
 
 #page > div.footer {
 	font-size: .75em;
