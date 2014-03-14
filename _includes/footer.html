@@ -1,13 +1,17 @@
         </div>
         <div class="footer">Copyright 2014. Design based on a Bauhaus <em>Katalog der Muster</em>, 1926.</div>
         <aside>
-            <h2>Useful Links:</h2>
+            <h2>Recent Posts:</h2>
             <ul>
                 {% for post in site.posts %}
                 <li>
                     <a href="{{ post.url }}">{{ post.title }}</a>
                 </li>
                 {% endfor %}
+            </ul>
+            <h2>Links:</h2>
+            <ul>
+                <li>Link</li>
             </ul>
         </aside>
     </div>

@@ -8,9 +8,10 @@ body {
 	margin-left: 10em;
 	background-image: -webkit-linear-gradient(left, rgb(255, 255, 255), rgb(255, 255, 255) 46em, rgb(204, 204, 204) 47em);
 }
-h1, h2, h3 { text-transform: uppercase; font-weight: bold; }
-h2 { font-size: 1.5em; line-height: 2.25em; letter-spacing: .12em }
-h3 { font-size: 1.15em; line-height: 1.7025em; }
+h1, h2, h3 {  font-weight: bold; }
+h1 { text-transform: uppercase; }
+h2 { font-size: 1.25em; line-height: 2.25em; letter-spacing: .12em }
+h3 { font-size: 1.15em; line-height: 1.7025em; margin: 1em 0; }
 h4 { font-size: 1.125em; line-height: 1.67625em; }
 
 em { font-style: italic; }
@@ -74,7 +75,10 @@ em { font-style: italic; }
 	color: black;
 }
 #page > .content { margin-top: 2.5em; }
-#page > .content > p { text-align: justify; text-indent: 2em; }
+#page p { text-align: justify; text-indent: 2em; }
+
+.content > section { margin: 1em 0; }
+section.about > h3 { font-style: italic; font-weight: 500; }
 
 #page > div.footer {
 	font-size: .75em;
@@ -83,7 +87,6 @@ em { font-style: italic; }
 }
 
 #page > aside {
-	width: 44%;
 	position: absolute;
 	left: 47em;
 	top: 0;
