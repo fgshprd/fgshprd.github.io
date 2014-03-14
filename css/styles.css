@@ -21,6 +21,7 @@ em { font-style: italic; }
 	width: 31em;
 }
 /*#page > div { max-width: 31em; }*/
+#page h1 { margin-bottom: 1em; }
 
 .header {
 	padding: 1em 0 0; 
@@ -96,4 +97,43 @@ em { font-style: italic; }
 	text-transform: none;
 	padding: 0;
 	margin: 0;
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+	body {
+		margin: 0;
+	}
+	#page, .header > .title {
+		width: 100%;
+		font-size: 1em;
+		line-height: 2em;
+		text-transform: none;
+	}
+	.header {
+		height: auto;
+	}
+	.header > .title:before {
+		margin-left: 0;
+	}
+	.header > .navlist {
+		margin: .5em 0 0 1.5em;
+	}
+	.header:after {
+		height: 6em;
+		left: 0;
+	}
+	#page {
+		margin: 0;
+	}
+	#page > .content, #page > div.footer {
+		margin: 2.5em;
+		line-height: 1.5em;
+	}
+	#page > aside {
+		position: static;
+		margin: 0;
+		font-size: .75em;
+		width: auto;
+	}
 }
