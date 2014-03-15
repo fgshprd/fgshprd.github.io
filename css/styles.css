@@ -153,5 +153,9 @@ aside p {
 		margin: 0;
 		font-size: .75em;
 		width: auto;
+		background-color: rgb(204, 204, 204);
+	}
+	#page > aside p {
+		line-height: 1.4em;
 	}
 }
