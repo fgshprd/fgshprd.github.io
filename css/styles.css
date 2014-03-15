@@ -13,7 +13,7 @@ h1 { text-transform: uppercase; }
 h2 { font-size: 1.25em; line-height: 2.25em; letter-spacing: .12em }
 h3 { font-size: 1.15em; line-height: 1.7025em; margin: 1em 0; }
 h4 { font-size: 1.125em; line-height: 1.67625em; }
-
+p, ul, ol { font-size: .875em; }
 em { font-style: italic; }
 
 #page {
@@ -75,7 +75,10 @@ em { font-style: italic; }
 	color: black;
 }
 #page > .content { margin-top: 2.5em; }
-#page p { text-align: justify; text-indent: 2em; }
+#page > .content p { text-align: justify; text-indent: 2em; }
+#page a { color: rgb(183, 39, 16); }
+#page a:active { color: rgb(255, 122, 0); }
+#page a:visited { color: rgb(51, 52, 58); }
 
 .content > section { margin: 1em 0; }
 section.about > h3 { font-style: italic; font-weight: 500; }
@@ -95,11 +98,23 @@ section.about > h3 { font-style: italic; font-weight: 500; }
 	margin: 1.5em;
 }
 
-#page > aside > h2 {
+aside > section {
+	margin: 2em 0 0;
+}
+
+aside > section > h2 {
 	font-size: 1em;
 	text-transform: none;
 	padding: 0;
 	margin: 0;
+}
+
+aside > section > h3 {
+	font-size: .95em;
+}
+
+aside p {
+	text-indent: none;
 }
 
 /* Smartphones (portrait) ----------- */
