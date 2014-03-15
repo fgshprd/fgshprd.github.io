@@ -83,6 +83,8 @@ em { font-style: italic; }
 .content > section { margin: 1em 0; }
 section.about > h3 { font-style: italic; font-weight: 500; }
 
+#page > .comments { margin: 2em 0; }
+
 #page > div.footer {
 	font-size: .75em;
 	line-height: 3em;
