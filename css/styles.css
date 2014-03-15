@@ -60,17 +60,17 @@ em { font-style: italic; }
 	display: inline-block;
 	margin-right: 1em;
 }
-.header > .navlist > li > a,
-.header > .navlist > li > a.link,
-.header > .navlist > li > a.visited,
-.header > .navlist > li > a.active {
+#page > .header > .navlist > li > a,
+#page > .header > .navlist > li > a.link,
+#page > .header > .navlist > li > a.visited,
+#page > .header > .navlist > li > a.active {
 	text-decoration: none;
 	color: rgb(255, 122, 0);
 }
-.header > .navlist > li:first-child > a,
-.header > .navlist > li:first-child > a:link,
-.header > .navlist > li:first-child > a:active,
-.header > .navlist > li:first-child > a:visited {
+#page > .header > .navlist > li:first-child > a,
+#page > .header > .navlist > li:first-child > a:link,
+#page > .header > .navlist > li:first-child > a:active,
+#page > .header > .navlist > li:first-child > a:visited {
 	text-decoration: none;
 	color: black;
 }
