@@ -120,7 +120,7 @@ aside p {
 }
 
 /* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
+@media only screen and (max-width : 360px) {
 	body {
 		margin: 0;
 	}
