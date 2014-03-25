@@ -15,6 +15,7 @@ h3 { font-size: 1.15em; line-height: 1.7025em; margin: 1em 0; }
 h4 { font-size: 1.125em; line-height: 1.67625em; }
 p, ul, ol { font-size: .875em; }
 em { font-style: italic; }
+pre { overflow-x: scroll; background-color: rgb(204, 204, 204); font-family: Courier, monospace; }
 
 #page {
 	margin: 0 0 0 1em;
@@ -75,7 +76,7 @@ em { font-style: italic; }
 	color: black;
 }
 #page > .content { margin-top: 2.5em; }
-#page > .content p { text-align: justify; text-indent: 2em; }
+#page > .content p { text-align: justify; margin-top: 1em;}
 #page a { color: rgb(183, 39, 16); }
 #page a:active { color: rgb(255, 122, 0); }
 #page a:visited { color: rgb(51, 52, 58); }
@@ -98,6 +99,10 @@ section.about > h2 { font-style: italic; font-weight: 500; font-size: 1.15em; li
 	height: 100%;
 	padding: 2em;
 	margin: 1.5em;
+}
+
+#page > aside > section:nth-child(1) > ul > li {
+	margin-bottom: 1em;
 }
 
 aside > section {
