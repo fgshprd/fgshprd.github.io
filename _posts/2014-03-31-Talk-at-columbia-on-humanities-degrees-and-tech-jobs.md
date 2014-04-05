@@ -6,7 +6,7 @@ title: Landing a Job in Technology with a Humanities Degree
 {{ page.title }}
 ================
 
-*These are notes I prepared for a talk delivered to a group of graduate students at Columbia University on March 31, 2014. The text of the event's announcement can be found below.*
+*These are notes I prepared for a talk delivered to a group of graduate students at Columbia University on March 31, 2014. The text of the event's announcement can be [found below](#event).*
 
 I'm going to attempt to address the topic at hand by breaking it down into 3 short questions followed by my responses.
 
@@ -37,7 +37,7 @@ I'm going to attempt to address the topic at hand by breaking it down into 3 sho
 
 ---
 
-**Event Announcement:**
+**<span id="event">Event Announcement:</span>**
 
 As we all know, the study of religion has never been more important than in today’s globalized world.  In addition to research and teaching in the academy, it is important for people working in government, NGOs, social organizations, secondary education, business, finance, journalism, media, and the arts to understand different languages, cultures, and religions.
  
