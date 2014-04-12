@@ -16,7 +16,7 @@ h4 { font-size: 1.125em; line-height: 1.67625em; }
 p, ul, ol { font-size: .875em; }
 em { font-style: italic; }
 strong { font-weight: bold; }
-pre { overflow-x: scroll; background-color: rgb(204, 204, 204); font-family: Courier, monospace; }
+pre { overflow-x: scroll; background-color: rgb(204, 204, 204); font-family: Courier, monospace; margin-top: 1em; }
 hr { border: 1px solid rgb(255, 122, 0); margin: 2em 0; }
 
 #page {
@@ -80,7 +80,7 @@ hr { border: 1px solid rgb(255, 122, 0); margin: 2em 0; }
 #page > .content { margin-top: 2.5em; }
 #page > .content p { text-align: justify; margin-top: 1em;}
 .content ol p, .content ul p { font-size: inherit; }
-.content ol, content ul { margin: 0 0 0 1.25em; }
+.content ol, .content ul { margin: 1em 0 1em 1.25em; }
 .content ol { list-style: decimal; }
 .content ul { list-style: disc; }
 #page a { color: rgb(183, 39, 16); }
