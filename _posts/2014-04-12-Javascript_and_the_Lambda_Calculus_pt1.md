@@ -216,7 +216,7 @@ Either of these returned functions could then be invoked with new arguments.
 
 Next time:
 
-We'll use *make_pair*, *select_first*, and *select_second* to build a conditional expression (if/then) as well as some basic Boolean operations (AND, OR, NOT).
+We'll use *make_pair*, *select_first*, and *select_second* to build a conditional expression (if/else) as well as some basic Boolean operations (AND, OR, NOT).
 
 [amazon]: http://amzn.com/0486478831
 [sepLambda]: http://plato.stanford.edu/entries/lambda-calculus/
