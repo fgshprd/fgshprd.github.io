@@ -64,7 +64,99 @@ Now, to construct the logical NOT operator, we need to simply reverse our terms:
 
 *not(TRUE)* will return *FALSE* (the function -- remember, everything is a function in this arrangmenet), and *not(FALSE)* will return *TRUE*. 
 
-Next time we'll move on to AND and OR!
+One way to represent what we've done here is by using a truth table to describe our inputs and outputs. For instance, our *not* function can be represented by this simple table
+
+|input | output|
+|------|-------|
+|1     | 0     |
+|0     | 1     |
+
+where 1 and 0 stand for *TRUE* and *FALSE*, respectively. 
+
+The Boolean *AND* operator can be represented by the following table:
+
+|x |y |output|
+|--|--|--|
+|0 |0 |0 |
+|0 |1 |0 |
+|1 |0 |0 |
+|1 |1 |1 |
+
+And the Boolean *OR* operator like so:
+
+|x |y |output|
+|--|--|--|
+|0 |0 |0 |
+|0 |1 |1 |
+|1 |0 |1 |
+|1 |1 |1 |
+
+Just as with *NOT*, both *AND* and *OR* can be modeled using our basic conditional. Michaelson points out, for instance, that a review of our truth-table demonstrates that we if our first expression is *FALSE*, we will always return *FALSE*. If our first expression is *TRUE*, the output depends entirely on the value of our second expression: *TRUE* if it is *TRUE*, and *FALSE* otherwise. In other words, if our first expression is *TRUE*, we return the value of our second expression; otherwise, we return *FALSE*. Here is this result expressed in terms of our conditional:
+
+expression1 ? expression2 : FALSE
+
+Translating this into JavaScript, we need our conditional to store our second expression and *FALSE*, and then apply the returned function to our first expression to get our result:
+
+    function and(x) {
+        return function(y) {
+            return conditional(y)(FALSE)(x);
+        }
+    }
+
+If you try this in your console, you'll find that the output matches the truth-table above, e.g.,
+
+    and(TRUE)(FALSE) => FALSE
+
+and 
+
+    and(TRUE)(TRUE) => TRUE
+
+Michaelson models *OR* in a similar manner. Here, we always return *TRUE* if our first expression is *TRUE*, and we return the value of our second expression otherwise:
+
+expression1 ? TRUE : expression2
+
+In this case, our conditional will store *TRUE* and our second expression and then apply the resulting function to our first expression:
+
+    function or(x) {
+        return function(y) {
+            return conditional(TRUE)(y)(x);
+        }
+    }
+
+Thus, 
+
+    or(TRUE)(FALSE) => TRUE
+
+and so on.
+
+Departing Michaelson's text for a moment, I'll point out that we could have generated our *OR* function differently. Since we already have *AND* and *NOT*, we could have constructed a *NAND* (i.e., "not and") function like this:
+
+    function nand(x) {
+        return function(y) {
+            return not(and(x)(y))
+        }
+    }
+
+*NAND* has the following truth-table, which has an output column that is an upside-down version of that found in the *OR* table:
+
+|x |y |output|
+|--|--|--|
+|0 |0 |1 |
+|0 |1 |1 |
+|1 |0 |1 |
+|1 |1 |0 |
+
+To generate the *OR* truth-table output from this, we need to reverse the inputs. Our JavaScript function would look like this:
+
+    function or2(x) {
+        return function(y) {
+            return nand(not(x))(not(y));
+        }
+    }
+
+In fact, we could recreate all of our Boolean functions using the *NAND* function if we were so inclined.
+
+That's it for our brief tour of Boolean functions as expressed through our minimalist version of the lambda calculus. Next time, we'll tackle numbers!
 
 [part1]: {% post_url 2014-04-12-Javascript_and_the_Lambda_Calculus_pt1 %}
 [amazon]: http://amzn.com/0486478831
