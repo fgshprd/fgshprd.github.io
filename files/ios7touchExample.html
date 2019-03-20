@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>iOS 7 Test Example</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url(../test_imgs/horizontalGrid5px.png);
+        }
+        button {
+            border: none;
+            background-color: #c5c5c5;
+            margin: 0 auto 50px;
+            padding: 10px;
+            width: 75%;
+            display: block;
+        }
+        .bottom {
+            bottom: 0;
+        }
+        .fixed {
+            position: fixed;
+        }
+        .box {
+            width: 10px;
+            height: 100px;
+            position: absolute;
+            border: 1px solid black;
+            top: 50%;
+        }
+        .box > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+        }
+        .center {
+            left: 50%;
+            margin-left: -5px;
+        }
+        #page {
+        }
+        #xy {
+            width: 75%;
+            height: 200px;
+            border: 1px solid gray;
+            margin: 10px auto;
+            overflow: scroll;
+            background-color: white;
+        }
+        #bottom {
+            width: 100%;
+        }
+        .row {
+            height: 4px;
+            width: 100%;
+            background: pink;
+            border-bottom: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+        <div id="xy"></div>
+        <div class="right box"><a href="javascript: logit('right clicked');void(0);">R</a></div>
+        <div class="left box"><a href="#" onclick="logit('left clicked');">L</a></div>
+        <div class="center box"><a href="javascript: logit('center clicked');void(0);">C</a></div>
+    </div>
+    <script type="text/javascript">
+        var log = document.getElementById('xy'),
+            barPoll = null,
+            winScrollY = window.scrollY;
+
+        function move(event) {
+            event.preventDefault();
+            logit('move');
+            return false;
+        }
+        function end(event) {
+            event.preventDefault();
+            logit('touchend');
+            return false;
+        }
+
+        function logit(msg) {
+            console.log(msg);
+            log.innerText = msg + '\n';
+        }
+        //document.addEventListener('touchmove', move, false);
+        document.addEventListener('touchend', end, false);
+    </script>
+</body>
+</html>
