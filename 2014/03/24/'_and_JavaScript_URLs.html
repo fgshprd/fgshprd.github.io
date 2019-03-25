@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Frank Shepard</title>
+    <title> Character escaping and JavaScript URLs: Frank Shepard</title>
     <link rel="icon" type="image/png" href="/imgs/favicon.png">
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/styles.css?v=1.0">
@@ -34,29 +34,52 @@
             </ul>
         </div>
         <div class="content">
-	<h1>Recent Posts</h1>
-	
-	<li>
-	    <a href="/2014/05/03/Javascript_and_the_Lambda_Calculus_pt2.html">JavaScript and the Lambda Calculus, pt. 2</a>
-	</li>
-	
-	<li>
-	    <a href="/2014/04/12/Javascript_and_the_Lambda_Calculus_pt1.html">JavaScript and the Lambda Calculus, pt. 1</a>
-	</li>
-	
-	<li>
-	    <a href="/2014/03/31/Talk-at-columbia-on-humanities-degrees-and-tech-jobs.html">Landing a Job in Technology with a Humanities Degree</a>
-	</li>
-	
-	<li>
-	    <a href="/2014/03/24/%2527_and_JavaScript_URLs.html">Character escaping and JavaScript URLs</a>
-	</li>
-	
-	<li>
-	    <a href="/2014/03/13/iOS7_Clicks.html">iOS7 History Swipes And Click Events</a>
-	</li>
-	
+<h1 id="character-escaping-and-javascript-urls">Character escaping and JavaScript URLs</h1>
+
+<p>In my previous post I provided an example that uses a JavaScript URL to demonstrate a quirk of iOS7. That issue is not confined to JavaScript HREFs – regular links as well as onclick handlers are affected, too. Here’s a little annoyance that is restricted to JavaScript HREFs – something I came across while working on a calendar component. It turns out that browsers sometimes treat strings differently depending on whether they are processed via a JavaScript HREF or in a more typical handler. For instance (and this may be the only instance), if you try to use JavaScript to open a URL containing the character code “%27”, which encodes a single quotation mark, it will fail if used inside a JavaScript HREF, and succeed if inside an onclick handler.</p>
+
+<p>In other words, this works:</p>
+
+<pre><code>onclick="window.open('http://test.com/test.html?test=%27hello', 'blank'); return false;"
+</code></pre>
+
+<p>And this doesn’t:</p>
+
+<pre><code>href="javascript: window.open('http://test.com/test.html?test=%27hello', 'blank'); void(0);"
+</code></pre>
+
+<p>In the latter case, Chrome displays the following error message:</p>
+
+<pre><code>"Uncaught SyntaxError: Unexpected identifier"
+</code></pre>
+
+<p>Here are some cases:</p>
+
+<ul>
+	<li><a href="javascript: window.open('http://test.com/test.html?test=%27hello', 'blank')">Link using a JavaScript Href </a></li>
+	<li><a href="#" onclick="window.open('http://test.com/test.html?test=%27hello', 'blank'); return false;">Link using an onclick handler</a></li>
+</ul>
+
+<p>This is particularly inconvenient if you need to pass user-provided URLs to your script. It’s yet another reason to avoid JavaScript HREFs in your code.</p>
+
+
 		</div>
+        <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'fgshprd'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
         <div class="footer">Copyright 2014. Design based on a Bauhaus <em>Katalog der Muster</em>, 1926.</div>
         <aside>
             <section>

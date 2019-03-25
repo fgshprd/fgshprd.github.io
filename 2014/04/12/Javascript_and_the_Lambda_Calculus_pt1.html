@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> JavaScript and the Lambda Calculus, pt. 1: Frank Shepard</title>
+    <link rel="icon" type="image/png" href="/imgs/favicon.png">
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/styles.css?v=1.0">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49014749-1', 'fgshprd.github.io');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <div class="header">
+            <div class="title">Frank Griffin Shepard</div>
+            <ul class="navlist">
+                <li><a href="/">fgshprd.github.io</a></li>
+                <li><a href="/contact.html">contact</a></li>
+                <li><a href="/posts.html">posts</a></li>
+            </ul>
+        </div>
+        <div class="content">
+<h1 id="javascript-and-the-lambda-calculus-pt-1">JavaScript and the Lambda Calculus, pt. 1</h1>
+
+<p>I recently picked up a copy of Greg Michaelson’s 1989 book <em><a href="http://amzn.com/0486478831">An Introduction to Functional Programming through Lambda Calculus</a></em> and decided to translate the functions described throughout into JavaScript. I’ve found that this helps me to better visualize and digest their structure and operation since I’m much better acquainted with the syntax of JavaScript than I am with that of LISP and other functional languages. JavaScript is up to the task because it treats functions as first-class citizens, meaning that functions can receive other functions as arguments and also return a new function upon completion. Functional programming, in its pure form, does not have global variables; one works only with functions, arguments passed to functions, and the values or expressions returned by functions. This means that one’s functions never produce side-effects. Here are some other features of functional programming according to Michaelson:</p>
+
+<ul>
+  <li>Functional languages are based on nested function calls rather than assignments;</li>
+  <li>In functional programming, a name is associated with only one value. You can not, for instance, change the value associated with a name (i.e., set x equal to 1 and then, later, to 2);</li>
+  <li>There is no fixed order of evaluation in functional programming. Your functions have no global dependencies or references and so can be combined and called in any order without side-effects;</li>
+</ul>
+
+<p>This style of programming can be implemented in JavaScript by limiting ourselves to a subset of its functionality. The goal is not to improve JavaScript as a language but to use these limits playfully so as to learn this important and powerful approach to programming.</p>
+
+<p><em>[Disclaimer: I am neither a computer scientist nor a mathematician, so my explanations of the material might occasionally be ill-informed. In such cases, I invoke my fundamental right to express my ignorance online. On the other hand, since this is a learning exercise, I’d definitely appreciate any corrections or comments!]</em></p>
+
+<p>The <a href="http://plato.stanford.edu/entries/lambda-calculus/">Lambda Calculus</a> was created by <a href="http://en.wikipedia.org/wiki/Alonzo_Church">Alonzo Church</a> in the 1930’s, during the same period that saw <a href="http://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a>’s work on computability via the famous notion of a <a href="http://plato.stanford.edu/entries/turing-machine/">Turing Machine</a>. Church and Turing are generally credited as co-creators of the theory of computability, and the Lambda Calculus and the Turing Machine were shown by Turing to be <a href="http://en.wikipedia.org/wiki/Lambda_calculus">equivalent in terms of their expressiveness</a>. Crudely speaking, however, we can contrast the two approaches as alternative styles: the Lambda Calculus corresponding to what we refer to as functional programming, and the Turing Machine corresponding to imperative programming. I am mostly familiar with the imperative style of programming, and since JavaScript is flexible enough to express both styles, I thought it would be fun to try to translate Michaelson’s examples into JavaScript.</p>
+
+<p>Church devised the lambda calculus as a way to describe and analyze mathematical functions in a formal way. Insofar as a mathematical function is understood as a kind of operation or computation, the lambda calculus also provides a formal means to describe and analyze computation. Michaelson’s book uses the lambda calculus to formulate a set of basic functions that can be combined and transformed to create more sophisticated and complex functions, much as basic electrical circuits can be combined to create basic logic gates, which can in turn be combined to create calculating machines and computers. The first set of functions are the following:</p>
+
+<ol>
+  <li>identity</li>
+  <li>self-application</li>
+  <li>function application</li>
+  <li>select first</li>
+  <li>select second</li>
+</ol>
+
+<p>Once we have these, they can be combined to create basic Boolean values and operations, and conditional expressions.</p>
+
+<p>Of course, all of these things are already built into JavaScript, so this exercise is completely superfluous; again, the point isn’t to create something new so much as to learn the fundamentals of a different style of programming – one that is intimately related to the foundations of computer science and mathematics. I think it will be interesting to see how, armed with only function statements and the rules by which arguments are applied to functions, we can build some of the features we take for granted in our everyday programming.</p>
+
+<p>One last note before getting to the functions: I mentioned above that functional programming, in its pure form, admits of no global variables; we will allow one exception to this: named functions. This will be used purely as a convenience, allowing us to combine functions in a more-readable format; otherwise, we’d have to write out the functions every time we use them, which would quickly get messy. (JavaScript has anonymous functions, of course, so we <em>could</em> do without function names if we had the patience.) Our functions will never refer to one another by name except insofar as one function is passed to another via an argument. There will be no other references to the global space, and none of the references we make will be allowed to alter their referents.</p>
+
+<p><strong>IDENTITY</strong></p>
+
+<p>In the lambda (λ) calculus, the identity function takes the following form:</p>
+
+<p>λx.x</p>
+
+<p>The ‘λ’ identifies the bound variable while the period demarcates the function body. Here, the bound variable is ‘x’ and the body simply returns the variable. My JavaScript representation looks likes this:</p>
+
+<pre><code>function identity(argument) {
+	return argument;
+}
+</code></pre>
+
+<p>Obviously, this function returns its argument without modification. For instance,</p>
+
+<pre><code>identity(1)
+</code></pre>
+
+<p>will return 1.</p>
+
+<p><em>NOTE: If we were being strict by not allowing the use of named functions, we’d have to write this out as follows:</em></p>
+
+<pre><code>(function (argument) { return argument; })(1)
+</code></pre>
+
+<p><em>If our argument were another anonymous function which took yet another anonymous function as its argument and so on, we’d soon tire of looking at the page.</em></p>
+
+<p>You might wonder what purpose such a simple and apparently inconsequential function might serve. If we’re not allowing ourselves variable assignments or declarations and can only work with arguments passed to functions, then we can represent a value, such as 1 or “hello world” using the identity function, e.g., </p>
+
+<pre><code>identity(1)
+</code></pre>
+
+<p>or</p>
+
+<pre><code>identity("hello world")
+</code></pre>
+
+<p>This allows us to pass values around without assigning any values to global variables. At least that’s my take on it (I don’t think Michaelson spells this out).</p>
+
+<p><strong>SELF-APPLICATION</strong></p>
+
+<p>λs.(s s)</p>
+
+<p>Here we have bound variable s, and a function body that is a function application (marked by the set of parentheses) that applies s to itself. Here’s the JavaScript equivalent:</p>
+
+<pre><code>function self_application(argument) {
+    return argument(argument);
+}
+</code></pre>
+
+<p>To demonstrate this function, Michaelson applies it to the identity function above. Passing identity to self-application ought to return identity, since we’d be applying identity to itself, and identity returns its argument unmodified. Sure enough, </p>
+
+<pre><code>self_application(identity)
+</code></pre>
+
+<p>returns</p>
+
+<pre><code>function identity(argument) {
+	return argument;
+}
+</code></pre>
+
+<p><strong>FUNCTION APPLICATION</strong></p>
+
+<p>λfunc.λarg.(func arg)</p>
+
+<p>Our bound variable is func, and our function body is another function, λarg.(func arg), with bound variable arg and a function application for its body. This function accepts a function as an argument and returns a new function that will apply the function (func) passed to the first function to a given argument (arg).</p>
+
+<p>Here’s where things start to get interesting. In JavaScript, we might be tempted to create a function that accepts two arguments:</p>
+
+<pre><code>function apply(func, arg) { ... }
+</code></pre>
+
+<p>But this would go against the spirit of the exercise. To represent a function with multiple arguments in the lambda calculus, we must <a href="http://en.wikipedia.org/wiki/Currying">curry</a> it. In other words, our functions will accept one argument; to work with more than one argument, we must chain our functions together by having them return new functions that can accept new arguments. We would pass our first argument to our first function, get a new function in return that will accept our second argument, and so on.</p>
+
+<p>In the example above, we would do this:</p>
+
+<p>((λfunc.λarg.(func arg) first) second)</p>
+
+<p>First, we apply our function to <em>first</em>, producing this:</p>
+
+<p>(λarg.(first arg) second)</p>
+
+<p>which is then reduced to this:</p>
+
+<p>(first second)</p>
+
+<p>which applies our second argument to our first, which was expected to be a function (as designated by its name, <em>func</em>). Our JavaScript will look like this:</p>
+
+<pre><code>function apply(func) {
+    return function (arg) {
+	    return func(arg);
+    }
+}
+</code></pre>
+
+<p>To use it, we would write this:</p>
+
+<pre><code>apply(func)(arg)
+</code></pre>
+
+<p>which first evaluates</p>
+
+<pre><code>apply(func)
+</code></pre>
+
+<p>and then applies the returned function to <em>arg</em>.</p>
+
+<p><strong>SELECT FIRST</strong></p>
+
+<p>λfirst.λsecond.first</p>
+
+<p>This function’s operation is self-explanatory: it returns the first of two arguments. You apply it to your first argument, and then apply the returned function to your second argument, getting your first argument back as a result. Here’s the JavaScript:</p>
+
+<pre><code>function select_first(first) { 
+    return function(second) { 
+	    return first; 
+    }; 
+}
+</code></pre>
+
+<p>For example, this</p>
+
+<pre><code>select_first(1)(2)
+</code></pre>
+
+<p>should return <em>1</em>. </p>
+
+<p><strong>SELECT SECOND</strong></p>
+
+<p>λfirst.λsecond.second</p>
+
+<p>This is the same as above, except it returns the second argument. Javascript:</p>
+
+<pre><code>function select_second(first) {
+    return function(second) {
+	    return second;
+    }
+}
+</code></pre>
+
+<p>Michaelson points out the the inner function of <em>select_second</em> is essentially our identity function. We’re effectively throwing our first argument away and returning <em>identity</em>. Of course, since we’re not allowing global references, we don’t have access to our definition of identity inside this function and thus have to write it out (i.e., we can’t simply return a reference to identity).</p>
+
+<p><strong>MAKE PAIR</strong></p>
+
+<p>λfirst.λsecond.λfunc((func first) second)</p>
+
+<p>This is the final function for this part of the series. This time, we’re working with three arguments, one of which will be a function (the other two can also be functions, of course). The idea is to pass two arguments and then do something with them using the third. The first application passes in the first argument, the second passes the second, returning a new function. This new function can be applied to another function (argument three), returning the result of the application of the function argument to either of the first two arguments. It’s a bit like our <em>apply</em> function, but with an additional <em>arg</em> to work with.</p>
+
+<p>To illustrate this function, Michaelson uses <em>identity</em> as the first argument, <em>apply</em> as the second argument, and <em>select_first</em> as the third argument, i.e., the argument that will be <em>func</em> in the definition above. If <em>first</em> above is <em>identity</em>, and <em>second</em> is <em>apply</em>, then applying <em>select_first</em> to the returned function </p>
+
+<p>λfunc.((func first) second) </p>
+
+<p>should produce <em>identity</em> (the first argument); that is,</p>
+
+<p>(λfunc.((func identity) apply) select_first)</p>
+
+<p>will become </p>
+
+<p>((select_first identity) apply)</p>
+
+<p>which evaluates to <em>identity</em>.</p>
+
+<p>Here’s the JavaScript:</p>
+
+<pre><code>function make_pair(first) {
+    return function(second) {
+	    return function(func) {
+		    return func(first)(second);
+	    }
+    }
+}
+</code></pre>
+
+<p>Michaelson’s example would look like this:</p>
+
+<pre><code>make_pair(identity)(apply)(select_first)
+</code></pre>
+
+<p>which will return</p>
+
+<pre><code>function identity(argument) {
+	return argument;
+}
+</code></pre>
+
+<p>On the other hand, this</p>
+
+<pre><code>make_pair(identity)(apply)(select_second)
+</code></pre>
+
+<p>will return this</p>
+
+<pre><code>function apply(func) {
+    return function (arg) {
+	    return func(arg);
+    }
+}
+</code></pre>
+
+<p>Either of these returned functions could then be invoked with new arguments.</p>
+
+<p>Next time:</p>
+
+<p>We’ll use <em>make_pair</em>, <em>select_first</em>, and <em>select_second</em> to build a conditional expression (if/else) as well as some basic Boolean operations (AND, OR, NOT).</p>
+
+
+		</div>
+        <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'fgshprd'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+        <div class="footer">Copyright 2014. Design based on a Bauhaus <em>Katalog der Muster</em>, 1926.</div>
+        <aside>
+            <section>
+                <h2>Recent Posts:</h2>
+                <ul>
+                    
+                    <li>
+                        <a href="/2014/05/03/Javascript_and_the_Lambda_Calculus_pt2.html">JavaScript and the Lambda Calculus, pt. 2</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/2014/04/12/Javascript_and_the_Lambda_Calculus_pt1.html">JavaScript and the Lambda Calculus, pt. 1</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/2014/03/31/Talk-at-columbia-on-humanities-degrees-and-tech-jobs.html">Landing a Job in Technology with a Humanities Degree</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/2014/03/24/%2527_and_JavaScript_URLs.html">Character escaping and JavaScript URLs</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/2014/03/13/iOS7_Clicks.html">iOS7 History Swipes And Click Events</a>
+                    </li>
+                    
+                </ul>
+            </section>
+            <section>
+                <h2>Links:</h2>
+                <p>Places I go.</p>
+                <h3>Humanities</h3>
+                <ul>
+                    <li><a href="http://www.brainpickings.org/">Brain Pickings</a></li>
+                    <li><a href="http://www.aldaily.com/">Arts &amp; Letters Daily</a></li>
+                    <li><a href="http://www.3quarksdaily.com/">3 Quarks Daily</a></li>
+                </ul>
+                <h3>Technology</h3>
+                <ul>
+                    <li><a href="http://alistapart.com/">A List Apart</a></li>
+                    <li><a href="http://dailyjs.com/">DailyJS</a></li>
+                    <li><a href="http://javascriptweekly.com/">JavaScript Weekly</a></li>
+                    <li><a href="http://webplatformdaily.org/">Open Web Platform Daily Digest</a></li>
+                    <li><a href="http://www.mobilexweb.com/">Breaking the Mobile Web</a></li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+</body>
+</html>
